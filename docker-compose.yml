@@ -48,7 +48,7 @@ services:
         - "traefik.port=8080"
         #- "traefik.backend.loadbalancer.swarm=true"
         - "traefik.backend.loadbalancer.stickiness=true"
-        - "traefik.backend.loadbalancer.sticky=true"
+        #- "traefik.backend.loadbalancer.sticky=true" #Deprecated configuration
         - "traefik.frontend.passHostHeader=true"
         - "traefik.frontend.rule=Host:proxy.DOMINIO.net"
         - "traefik.frontend.auth.basic:admin:$apr1$G/ZU8lWP$lHzIC8pjGrx8JsrWkzqgO."

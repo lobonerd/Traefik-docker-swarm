@@ -53,5 +53,5 @@ services:
         - "traefik.frontend.rule=Host:proxy.DOMINIO.net"
         - "traefik.frontend.auth.basic:admin:$apr1$G/ZU8lWP$lHzIC8pjGrx8JsrWkzqgO."
 networks:
-  web: # new docker network to work
+  web: # docker network to work apps backend swarm mode
     driver: overlay

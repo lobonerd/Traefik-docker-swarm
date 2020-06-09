@@ -1,0 +1,30 @@
+version: '3.5'
+
+services:
+
+  app:
+    image: (imagen que se desplegara dentro de traefik) # el ejemplo es con una app de java
+
+    volumes:
+      - ./logs:/logs # montar para log
+
+    ports:
+      - "8080:8080" # puerto a exponer
+    environment:
+      ES_JAVA_OPTS: "-Xmx376m -Xms376m"
+    networks:
+      - traefik_web #importante en el docker-compose de traefik se declara la red y en el de la app se llama la red completa
+    deploy:
+      replicas: 3
+      placement:
+        constraints: [node.role==worker] #solo se ejecutaran el los workers
+      labels:
+       - "traefik.enable=true"
+       - "traefik.docker.network=traefik_web"
+       - "traefik.port=8080"
+       - "traefik.backend.loadbalancer.stickiness=true"
+       - "traefik.frontend.rule=Host:app.DOMINIO.net"
+networks:
+  traefik_web:
+    external:
+      name: traefik_web
